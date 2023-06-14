@@ -1,0 +1,20 @@
+- name: Generate a list from item1 to item1000
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Generate list
+      set_fact:
+        item_list: []
+
+    - name: Populate list
+      set_fact:
+        item_list: "{{ item_list + ['item' + item_num] }}"
+      loop: "{{ range(1, 1001) | map('string') | list }}"
+      loop_control:
+        loop_var: item_num
+
+    - name: Print item list
+      debug:
+        var: item_list
+

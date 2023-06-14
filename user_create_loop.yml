@@ -1,0 +1,16 @@
+- name: Create 1000 users
+  hosts: localhost
+  gather_facts: false
+  become: true
+
+  vars_files:
+    - vars.yml
+
+  tasks:
+    - name: Create users
+      user:
+        name: "dev-user{{ item }}"
+        password: "{{ user_password | password_hash('sha512') }}"
+        state: present
+      loop: "{{ range(1, 1001) | list }}"
+

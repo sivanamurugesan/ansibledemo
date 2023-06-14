@@ -1,0 +1,13 @@
+---
+- name: Example playbook with debug module
+  hosts: myhost
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: Execute a command
+      shell: echo "Hello, world!"
+      register: command_output
+
+    - name: Debug registered variable
+      debug:
+        var: command_output.stdout

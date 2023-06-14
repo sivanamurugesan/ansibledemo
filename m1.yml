@@ -1,0 +1,67 @@
+---
+- name: Playbook example using ansible_architecture
+  hosts: myhost
+  connection: local
+  gather_facts: true
+  vars:
+    my_list:
+      - item1
+      - item2
+      - foo
+      - bar
+  tasks:
+    - name: Display target host's architecture
+      debug:
+        msg: "Architecture: {{ ansible_architecture }}"
+
+    - name: Display target host's BIOS date
+      debug:
+        msg: "BIOS Date: {{ ansible_bios_date }}"
+
+    - name: Display target host's BIOS version
+      debug:
+        msg: "BIOS Version: {{ ansible_bios_version }}"
+
+    - name: Display current date and time
+      debug:
+        msg: "Current Date and Time: {{ ansible_date_time }}"
+
+    - name: Display target host's distribution
+      debug:
+        msg: "Distribution: {{ ansible_distribution }}"
+
+    - name: Display target host's distribution release
+      debug:
+        msg: "Distribution Release: {{ ansible_distribution_release }}"
+
+    - name: Display target host's distribution version
+      debug:
+        msg: "Distribution Version: {{ ansible_distribution_version }}"
+
+    - name: Display target host's domain
+      debug:
+        msg: "Domain: {{ ansible_domain }}"
+
+    - name: Display environment variables
+      debug:
+        var: ansible_env
+
+    - name: Display target host's FQDN
+      debug:
+        msg: "FQDN: {{ ansible_fqdn }}"
+
+    - name: Find first item containing 'item'
+      debug:
+        var: my_list | select("match", "item") | first
+
+    - name: Add prefix to each item in list
+      debug:
+        var: my_list | map("regex_replace", "^", "prefix_")
+
+    - name: Filter list for items not containing 'item'
+      debug:
+        var: my_list | reject("match", "item")
+
+    - name: Filter list for items containing 'item'
+      debug:
+        var: my_list | select("match", "item")

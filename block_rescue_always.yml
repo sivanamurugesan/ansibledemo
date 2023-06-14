@@ -1,0 +1,23 @@
+---
+- name: Example playbook with block, rescue, and always
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Task 1 - Block
+      block:
+        - debug:
+            msg: "Task 1 in the block executed"
+        - command: /path/to/failing-command
+      rescue:
+        - debug:
+            msg: "Rescue task executed due to failure"
+
+    - name: Task 2 - Always
+      block:
+        - debug:
+            msg: "Task 2 in the block executed"
+      always:
+        - debug:
+            msg: "Always task executed regardless of success or failure"
+

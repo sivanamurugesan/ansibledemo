@@ -1,0 +1,25 @@
+---
+- name: Example playbook with regular expressions
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Extract numbers from a string using regex_replace
+      vars:
+        my_string: "Hello 123 World 456"
+      debug:
+        msg: "{{ my_string | regex_replace('\\D', '') }}"
+
+    - name: Check if a string matches a regex pattern
+      vars:
+        my_string: "abc123"
+        regex_pattern: "^[a-z]+$"
+      debug:
+        msg: "String matches pattern: {{ my_string | regex_search(regex_pattern) is not none }}"
+
+    - name: Extract matches from a string using regex_findall
+      vars:
+        my_string: "Hello 123 World 456"
+      debug:
+        msg: "Matches: {{ my_string | regex_findall('\\d+') }}"
+

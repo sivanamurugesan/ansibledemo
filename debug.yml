@@ -1,0 +1,9 @@
+---
+- name: Example playbook with debug module
+  hosts: myhost
+  gather_facts: false
+
+  tasks:
+    - name: Debug message
+      debug:
+        msg: "Hello, world!"

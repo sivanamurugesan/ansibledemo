@@ -1,0 +1,15 @@
+---
+- name: Example playbook with debug module
+  hosts: myhost
+  gather_facts: false
+  vars:
+    my_variable: "Hello, world!"
+
+  tasks:
+    - name: Debug variable value
+      debug:
+        var: my_variable
+
+    - name: Debug variable value
+      debug:
+        var: my_variable

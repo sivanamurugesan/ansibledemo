@@ -1,0 +1,40 @@
+---
+- name: Example playbook with conditional statements
+  hosts: myhost
+  gather_facts: true
+
+  tasks:
+    - name: Task 1 - Conditional with when statement
+      debug:
+        msg: "Task 1 executed"
+      when: ansible_os_family == "Debian"
+
+    - name: Task 2 - Conditional with failed_when statement
+      debug:
+        msg: "Task 2 failed"
+      failed_when: inventory_hostname == "host1"
+
+    - name: Task 3 - Conditional with changed_when statement
+      debug:
+        msg: "Task 3 changed"
+      changed_when: ansible_distribution_major_version == "18"
+
+    - name: Task 4 - Conditional with assert statement
+      assert:
+        that: ansible_distribution == "Ubuntu"
+        msg: "The distribution must be Ubuntu"
+
+    - name: Task 5 - Conditional with block and rescue statements
+      block:
+        - debug:
+            msg: "Block task executed"
+      rescue:
+        - debug:
+            msg: "Rescue task executed"
+
+    - name: Task 6 - Conditional with loop and when statement
+      debug:
+        msg: "Item: {{ item }}"
+      loop: [1, 2, 3, 4, 5]
+      when: item % 2 == 0
+

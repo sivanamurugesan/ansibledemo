@@ -1,0 +1,5 @@
+The block statement encapsulates the task(s) that you want to group together.
+The rescue statement specifies the task(s) to be executed if any task within the block fails.
+The always statement specifies the task(s) that will always be executed regardless of the success or failure of the tasks within the block.
+The notify statement triggers the associated handler(s) when the tasks within the block complete.
+The handler defines the task(s) that will be executed when triggered by the notify statement.

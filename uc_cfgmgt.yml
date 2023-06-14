@@ -1,0 +1,27 @@
+---
+- name: Configuration Management
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Configuration Management
+      block:
+        - name: Copy Configuration File
+          copy:
+            src: templates/config.conf.j2
+            dest: /etc/myapp/config.conf
+            owner: root
+            group: root
+            mode: '0644'
+
+        - name: Reload Configuration
+          debug:
+            msg: "Reloading configuration..."
+          notify: Restart Service
+
+  handlers:
+    - name: Restart Service
+      service:
+        name: myapp
+        state: restarted
+

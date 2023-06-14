@@ -1,0 +1,34 @@
+---
+- name: Service Management with Rollback
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Service Management
+      block:
+        - name: Stop Service
+          service:
+            name: myservice
+            state: stopped
+
+        - name: Update Service
+          debug:
+            msg: "Updating service..."
+
+        - name: Start Service
+          service:
+            name: myservice
+            state: started
+
+      rescue:
+        - name: Rollback Changes
+          service:
+            name: myservice
+            state: started
+          when: ansible_failed_task is defined
+
+      always:
+        - name: Clean up Temporary Files
+          file:
+            path: /tmp/myservice_temp_files
+            state: absent
+

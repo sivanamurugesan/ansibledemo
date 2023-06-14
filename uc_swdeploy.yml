@@ -1,0 +1,31 @@
+---
+- name: Software Deployment
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Software Deployment
+      block:
+        - name: Download Software Package
+          debug:
+            msg: "Downloading software package..."
+
+        - name: Extract Software Package
+          debug:
+            msg: "Extracting software package..."
+
+        - name: Install Software
+          debug:
+            msg: "Installing software..."
+
+        - name: Configure Software
+          debug:
+            msg: "Configuring software..."
+
+        - name: Verify Installation
+          debug:
+            msg: "Verifying installation..."
+      always:
+        - name: Clean up Temporary Files
+          file:
+            path: /tmp/software_temp_files
+            state: absent

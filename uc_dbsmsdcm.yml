@@ -1,0 +1,29 @@
+---
+- name: Database Operations
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Database Operations
+      block:
+        - name: Take Database Backup
+          debug:
+            msg: "Taking database backup..."
+
+        - name: Execute SQL Scripts
+          debug:
+            msg: "Executing SQL scripts..."
+
+        - name: Apply Schema Changes
+          debug:
+            msg: "Applying schema changes..."
+
+        - name: Verify Database Upgrade
+          debug:
+            msg: "Verifying database upgrade..."
+
+      rescue:
+        - name: Rollback Schema Changes
+          debug:
+            msg: "Rolling back schema changes..."
+          when: ansible_failed_task is defined
